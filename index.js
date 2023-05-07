@@ -15,7 +15,8 @@ app.post('/results', express.urlencoded({ extended: false }), function (req, res
 
 
     //* setup headless chrome
-    const driver = new Builder().forBrowser('chrome').setChromeOptions(new chrome.Options().headless().windowSize({ width, height })).build();
+    const service = new chrome.ServiceBuilder('/tmp/chromedriver').build();
+    const driver = new Builder().forBrowser('chrome').setChromeService(service).setChromeOptions(new chrome.Options().headless().windowSize({ width, height })).build();
     const url = 'https://www.bit.lk/index.php/results/';
 
     var indexNum = req.body.index;
